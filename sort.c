@@ -6,7 +6,7 @@
 /*   By: lgottsch <lgottsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:21:04 by lgottsch          #+#    #+#             */
-/*   Updated: 2025/01/07 17:11:35 by lgottsch         ###   ########.fr       */
+/*   Updated: 2025/01/08 18:14:14 by lgottsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_input_sorted2(t_list *tmp, int i, int y, int size)
 	return (y);
 }
 
-int	is_input_sorted(t_stack *stacks)
+int	is_input_sorted(t_list *a)
 {
 	int		size;
 	int		i;
@@ -43,8 +43,8 @@ int	is_input_sorted(t_stack *stacks)
 
 	i = 0;
 	y = 0;
-	size = ft_lstsize(stacks->a);
-	tmp = stacks->a;
+	size = ft_lstsize(a);
+	tmp = a;
 	y = is_input_sorted2(tmp, i, y, size);
 	if (y == size - 1)
 		return (1);
@@ -90,11 +90,11 @@ t_stack	*sort(t_stack *stacks)
 	int	size;
 
 	size = ft_lstsize(stacks->a);
-	if (is_input_sorted(stacks) == 1)
+	if (is_input_sorted(stacks->a) == 1)
 		return (stacks);
-	if (size == 2)
+	if (size == 2 && is_input_sorted(stacks->a) == 0)
 		stacks = sort_2(stacks);
-	else if (size == 3)
+	else if (size == 3 && is_input_sorted(stacks->a) == 0)
 		stacks = sort_3(stacks);
 	else
 	{
@@ -103,7 +103,8 @@ t_stack	*sort(t_stack *stacks)
 		while (ft_lstsize(stacks->a) > 3)
 			stacks = do_bigger_sort(stacks);
 		stacks = final_rot_b(stacks);
-		stacks = sort_3(stacks);
+		if (is_input_sorted(stacks->a) == 0)
+			stacks = sort_3(stacks);
 		stacks = push_back(stacks);
 	}
 	return (stacks);
