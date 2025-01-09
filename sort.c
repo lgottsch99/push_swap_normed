@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgottsch <lgottsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Watanudon <Watanudon@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:21:04 by lgottsch          #+#    #+#             */
-/*   Updated: 2025/01/08 18:14:14 by lgottsch         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:36:33 by Watanudon        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ t_stack	*sort(t_stack *stacks)
 	size = ft_lstsize(stacks->a);
 	if (is_input_sorted(stacks->a) == 1)
 		return (stacks);
-	if (size == 2 && is_input_sorted(stacks->a) == 0)
+	if (size == 2)
 		stacks = sort_2(stacks);
-	else if (size == 3 && is_input_sorted(stacks->a) == 0)
+	else if (size == 3)
 		stacks = sort_3(stacks);
 	else
 	{
